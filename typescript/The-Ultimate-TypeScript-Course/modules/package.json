@@ -1,0 +1,16 @@
+{
+  "name": "ultimate-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "fundamentals": "tsc && node dist/01_fundamentals",
+    "types": "tsc && node dist/02_advanced_types",
+    "oop": "tsc && node dist/03_oop",
+    "generics": "tsc && node dist/04_generics",
+    "decorators": "tsc && node dist/05_decorators"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
