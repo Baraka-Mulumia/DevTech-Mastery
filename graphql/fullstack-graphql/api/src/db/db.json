@@ -1,0 +1,42 @@
+{
+  "user": [
+    {
+      "id": "w-OKoRHnx7waop6AO0h6Y",
+      "createdAt": 1676624051296,
+      "username": "test"
+    },
+    {
+      "id": "ntpmKxz2Aabs9hT6X_jVw",
+      "createdAt": 1676624075870,
+      "username": "test2"
+    },
+    {
+      "id": "ZqmIPWRCfzUU4G4FFJoWV",
+      "createdAt": 1676624143753,
+      "username": "test32"
+    }
+  ],
+  "pet": [
+    {
+      "id": "jBWMVGjm50l6LGwepDoty",
+      "name": "carol",
+      "type": "BIRD",
+      "createdAt": "2019-01-01T00:00:00.000Z",
+      "owner": "ZqmIPWRCfzUU4G4FFJoWV"
+    },
+    {
+      "id": "jBWMVGjm50r3w97wepDoty",
+      "name": "Fido",
+      "type": "DOG",
+      "createdAt": "2019-01-01T00:00:00.000Z",
+      "owner": "ZqmIPWRCfzUU4G4FFJoWV"
+    },
+    {
+      "id": "w-OKoRHnx7waop6AO0h6Y",
+      "createdAt": 1676624143758,
+      "name": "chastity",
+      "type": "CAT",
+      "owner": "ntpmKxz2Aabs9hT6X_jVw"
+    }
+  ]
+}
