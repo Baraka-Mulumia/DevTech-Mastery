@@ -1,0 +1,11 @@
+{
+  "name": "typescript-from-scratch",
+  "packageManager": "yarn@3.2.4",
+  "scripts": {
+    "dev": "tsc --watch --preserveWatchOutput",
+    "tsc-init": "tsc --init"
+  },
+  "devDependencies": {
+    "typescript": "^4.8.4"
+  }
+}

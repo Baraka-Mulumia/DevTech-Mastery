@@ -1,0 +1,18 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.wordWrap": "on",
+  "prettier.arrowParens": "always",
+  "prettier.bracketSpacing": true,
+  "prettier.trailingComma": "es5",
+  "prettier.singleQuote": false,
+  "prettier.printWidth": 80,
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "prettier.semi": true,
+  "prettier.proseWrap": "always",
+  "prettier.jsxSingleQuote": false,
+  "prettier.bracketSameLine": false
+}
