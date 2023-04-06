@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playground — Complete Intro to Vue 3</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>
+        <span v-if="message.length % 2 == 0">Even</span>
+        <span v-else>Odd</span>
+        {{ message }}
+      </h1>
+
+      <p v-if="characters.length == 0">There are no characters</p>
+
+      <ul v-else>
+        <li v-for="character in characters" :key="character">
+          {{ character.name }}
+        </li>
+      </ul>
+
+      <h1>Counter</h1>
+
+      <div>
+        <label for="incrementAmount">Increment By: </label>
+        <input
+          type="number"
+          id="incrementAmount"
+          v-model.number="incrementAmount"
+        />
+      </div>
+
+      <p>{{count}}</p>
+
+      <button @click="decrementCount" :disabled="count <= 0">
+        Decrement Count
+      </button>
+
+      <button @click="incrementCount">Increment Count</button>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+      Vue.createApp({
+        data: () => ({
+          message: 'Hello Vue! i am here',
+          incrementAmount: 1,
+          characters: [
+            {
+              name: 'Michael Scofield',
+            },
+            {
+              name: 'Lincoln Burrows',
+            },
+            {
+              name: 'Sara Tancredi',
+            },
+            {
+              name: 'LJ Burrows',
+            },
+          ],
+          count: 0,
+        }),
+
+        methods: {
+          incrementCount() {
+            this.count += this.incrementAmount;
+          },
+
+          decrementCount() {
+            this.count -= this.incrementAmount;
+          },
+          // changeIncrementAmount(event) {
+          //   this.incrementAmount = event.target.value;
+          // },
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>

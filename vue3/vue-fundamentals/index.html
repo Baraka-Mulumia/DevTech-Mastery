@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playground — Complete Intro to Vue 3</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>
+        <span v-if="message.length % 2 == 0">Even</span>
+        <span v-else>Odd</span>
+        {{ message }}
+      </h1>
+
+      <div>
+        <label for="newCharacter"> Enter new Character </label>
+        <input
+          type="text"
+          id="newCharacter"
+          v-model.text="newCharacter"
+          @keyup.enter="addCharacter"
+        />
+      </div>
+
+      <p v-if="characters.length == 0">There are no characters</p>
+
+      <ul v-else>
+        <li v-for="character in characters" :key="character">
+          <p>{{ character.name }}</p>
+          <button @Click="addFavCHaracter(character)">Add to Favorites</button>
+        </li>
+      </ul>
+
+      <h1>Favorite Characters</h1>
+
+      <p v-if="favCharacters.length == 0">You have no Favorite characters</p>
+
+      <ul v-else>
+        <li v-for="favChar in favCharacters" :key="Math.random()">
+          <p>{{ favChar.name }}</p>
+          <button @Click="removeFavCharacter(favChar)">
+            Remove from Favorites
+          </button>
+        </li>
+      </ul>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+      Vue.createApp({
+        data: () => ({
+          message: 'Hello Vue! i am here',
+          characters: [
+            {
+              name: 'Michael Scofield',
+            },
+            {
+              name: 'Lincoln Burrows',
+            },
+            {
+              name: 'Sara Tancredi',
+            },
+            {
+              name: 'LJ Burrows',
+            },
+          ],
+          newCharacter: '',
+          favCharacters: [],
+        }),
+
+        methods: {
+          addFavCHaracter(character) {
+            this.favCharacters.push(character);
+          },
+
+          removeFavCharacter(character) {
+            this.favCharacters = this.favCharacters.filter(
+              (c) => c.name != character.name
+            );
+          },
+
+          addCharacter(event) {
+            this.characters.push({
+              name: this.newCharacter,
+            });
+            this.newCharacter = '';
+          },
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>
