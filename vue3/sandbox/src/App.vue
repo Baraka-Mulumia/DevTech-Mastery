@@ -1,47 +1,93 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script>
+import BaseCounter from './components/BaseCounter.vue'
+import CharacterList from './components/CharacterList.vue'
+import FavoriteCharacters from './components/FavoriteCharacters.vue'
+import BaseButton from './components/BaseButton.vue'
+import BaseLayout from './components/BaseLayout.vue'
+
+export default {
+  components: {
+    BaseCounter,
+    BaseButton,
+    BaseLayout,
+    CharacterList,
+    FavoriteCharacters
+  },
+
+  data: () => ({
+    message: 'Hello Vue! i am here',
+    characters: [
+      {
+        name: 'Michael Scofield',
+        character: 'intelligent'
+      },
+      {
+        name: 'Lincoln Burrows',
+        character: 'cunning'
+      },
+      {
+        name: 'Sara Tancredi',
+        character: 'loyal'
+      },
+      {
+        name: 'LJ Burrows',
+        character: 'cunning'
+      }
+    ],
+    newCharacter: '',
+    favCharacters: []
+  }),
+
+  methods: {
+    addFavCharacter(character) {
+      this.favCharacters.push(character)
+    },
+
+    removeFavCharacter(character) {
+      this.favCharacters = this.favCharacters.filter((c) => c.name != character.name)
+    },
+
+    addCharacter(event) {
+      this.characters.push({
+        name: this.newCharacter
+      })
+      this.newCharacter = ''
+    }
+  }
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <h1>
+    <span v-if="message.length % 2 == 0">Even</span>
+    <span v-else>Odd</span>
+    {{ message }}
+  </h1>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+  <!-- <BaseButton> Arrow Left - Hi </BaseButton> -->
 
-  <main>
-    <TheWelcome />
-  </main>
+  <BaseLayout>
+    <template v-slot:sidebar>
+      <BaseCounter />
+    </template>
+    <template v-slot:main>
+      <div>
+        <label for="newCharacter"> Enter new Character </label>
+        <input
+          type="text"
+          id="newCharacter"
+          v-model.text="newCharacter"
+          @keyup.enter="addCharacter"
+        />
+      </div>
+
+      <CharacterList :characters="characters" @add-fav-character="addFavCharacter" />
+
+      <FavoriteCharacters
+        :favCharacters="favCharacters"
+        @remove-fav-character="removeFavCharacter"
+      />
+    </template>
+    <template v-slot:footer> Footer </template>
+  </BaseLayout>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
