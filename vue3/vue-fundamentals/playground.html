@@ -22,7 +22,7 @@
         </li>
       </ul>
 
-      <h1>Counter</h1>
+      <h1>{{ displayTitle }}</h1>
 
       <div>
         <label for="incrementAmount">Increment By: </label>
@@ -31,6 +31,7 @@
           id="incrementAmount"
           v-model.number="incrementAmount"
         />
+        <p>{{optimizeIncremeentAmount}}</p>
       </div>
 
       <p>{{count}}</p>
@@ -47,6 +48,7 @@
       Vue.createApp({
         data: () => ({
           message: 'Hello Vue! i am here',
+          counterTitle: 'Counter Standard',
           incrementAmount: 1,
           characters: [
             {
@@ -65,17 +67,36 @@
           count: 0,
         }),
 
+        computed: {
+          displayTitle() {
+            if (this.count > 20) {
+              return 'Counter standard - Very Long';
+            } else {
+              return 'Counter Standard';
+            }
+          },
+
+          optimizeIncremeentAmount() {
+            return this.displayTitle.length * this.incrementAmount;
+          },
+        },
+
         methods: {
           incrementCount() {
-            this.count += this.incrementAmount;
+            this.count += this.optimizeIncremeentAmount;
           },
 
           decrementCount() {
-            this.count -= this.incrementAmount;
+            this.count -= this.optimizeIncremeentAmount;
           },
-          // changeIncrementAmount(event) {
-          //   this.incrementAmount = event.target.value;
-          // },
+        },
+
+        watch: {
+          count(newValue) {
+            if (newValue > 20) {
+              this.counterTitle += ' very looooong....';
+            }
+          },
         },
       }).mount('#app');
     </script>
