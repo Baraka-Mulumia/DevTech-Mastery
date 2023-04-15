@@ -1,21 +1,33 @@
 <script>
 import HomePage from "./components/HomePage.vue";
 import LoginPage from "./components/LoginPage.vue";
+import UsersPage from "./components/UserPage.vue";
 
 export default {
   components: {
     HomePage,
     LoginPage,
+    UsersPage,
   },
   data: () => ({
     currentPage: "Home",
   }),
+
+  computed: {
+    renderPage() {
+      return this.currentPage + "Page";
+    },
+  },
+
   methods: {
     showHomePage() {
       this.currentPage = "Home";
     },
     showLoginPage() {
       this.currentPage = "Login";
+    },
+    showUsersPage() {
+      this.currentPage = "Users";
     },
   },
 };
@@ -28,11 +40,12 @@ export default {
     </span>
     <nav class="nav">
       <a href="#" @click.prevent="showHomePage">Home</a>
+      <a href="#" @click.prevent="showUsersPage">Users</a>
       <a href="#" @click.prevent="showLoginPage">Login</a>
     </nav>
   </header>
-  <HomePage v-if="currentPage === 'Home'" />
-  <LoginPage v-else />
+
+  <component :is="renderPage" />
 </template>
 
 <style>
