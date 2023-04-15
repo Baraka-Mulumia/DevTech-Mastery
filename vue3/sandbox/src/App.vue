@@ -1,12 +1,18 @@
 <script>
 // import ScratchPad from './components/ScratchPad/main.vue'
-import PokeApi from './components/PokeAPI/main.vue'
+import Pokedex from './components/Pokedex/main.vue'
 
 export default {
   components: {
-    PokeApi
+    Pokedex
   }
 }
 </script>
 
-<template><PokeApi /></template>
+<template>
+  <h1>Pokemon App</h1>
+  <Suspense>
+    <Pokedex />
+    <template v-slot:fallback> Loading pokedex data .......... </template>
+  </Suspense>
+</template>

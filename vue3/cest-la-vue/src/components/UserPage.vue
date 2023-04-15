@@ -2,27 +2,34 @@
 import UserCard from "./UserCard.vue";
 import { uuidv4 } from "../utils/fn";
 
+import { reactive } from "vue";
+
 export default {
   components: {
     UserCard,
   },
 
-  data: () => ({
-    users: [],
-  }),
+  async setup() {
+    const state = reactive({
+      users: [],
+    });
 
-  methods: {
-    async fetchUsers() {
-      this.users = await fetch(
+    const fetchUsers = async () => {
+      const response = await fetch(
         "https://jsonplaceholder.typicode.com/users"
       ).then((response) => response.json());
-    },
 
-    uniqueID: uuidv4,
+      return response;
+    };
+    const users = await fetchUsers();
+
+    state.users = users;
+
+    return state;
   },
 
-  created() {
-    this.fetchUsers();
+  methods: {
+    uniqueID: uuidv4,
   },
 };
 </script>
