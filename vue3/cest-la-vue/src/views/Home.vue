@@ -1,13 +1,10 @@
 <script setup>
 import UserCard from "@/components/UserCard.vue";
-import { userList } from "@/composables/useUserStore";
 import { uuidv4 } from "@/utils/fn";
+import { useUserStore } from "@/stores/UserStore";
 
-import { computed } from "vue";
-
-const previewUsers = computed(() => {
-  return userList.value.slice(0, 3);
-});
+const userStore = useUserStore();
+userStore.fetchUsers();
 </script>
 
 <template>
@@ -20,7 +17,7 @@ const previewUsers = computed(() => {
   </main>
   <div class="user-container">
     <UserCard
-      v-for="user in previewUsers"
+      v-for="user in userStore.previewList"
       :key="uuidv4()"
       :name="user.name"
       :email="user.email"

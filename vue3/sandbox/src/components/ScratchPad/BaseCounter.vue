@@ -1,15 +1,12 @@
 <script setup>
 import { reactive, computed } from 'vue'
-import { newCount } from '../../composables/CountStore'
 
-const state = reactive({
-  count: newCount,
-  counterTitle: 'Counter Standard',
-  incrementAmount: 8
-})
+import { useCountStore } from '../../stores/CountStore'
+
+const countStore = useCountStore()
 
 const displayTitle = computed(() => {
-  if (state.count > 20) {
+  if (countStore.count > 20) {
     return 'Counter standard - Very Long'
   } else {
     return 'Counter Standard'
@@ -17,16 +14,8 @@ const displayTitle = computed(() => {
 })
 
 const optimizeIncrementAmount = computed(() => {
-  return displayTitle.value.length * state.incrementAmount
+  return displayTitle.value.length * countStore.incrementAmount
 })
-
-const incrementCount = () => {
-  state.count += optimizeIncrementAmount.value
-}
-
-const decrementCount = () => {
-  state.count -= optimizeIncrementAmount.value
-}
 </script>
 
 <template>
@@ -35,14 +24,14 @@ const decrementCount = () => {
 
     <div>
       <label for="incrementAmount">Increment By: </label>
-      <input type="number" id="incrementAmount" v-model.number="state.incrementAmount" />
+      <input type="number" id="incrementAmount" v-model.number="countStore.incrementAmount" />
       <p>Optimized Increment: {{ optimizeIncrementAmount }}</p>
     </div>
 
-    <p>Count : {{ state.count }}</p>
+    <p>Count : {{ countStore.count }}</p>
 
-    <button @click="decrementCount" :disabled="state.count <= 0">Decrement Count</button>
-    <button @click="incrementCount">Increment Count</button>
+    <button @click="countStore.decrement" :disabled="countStore.count <= 0">Decrement Count</button>
+    <button @click="countStore.increment">Increment Count</button>
   </div>
 </template>
 
