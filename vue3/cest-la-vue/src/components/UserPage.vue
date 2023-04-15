@@ -18,9 +18,9 @@ userList.value = await fetchUsers();
 </script>
 
 <template>
-  <main>
+  <main :class="$style.main">
     <h1>C'est La Vue - Users</h1>
-    <div class="user-container">
+    <div :class="$style['user-container']">
       <UserCard
         v-for="user in userList"
         :key="uuidv4()"
@@ -32,8 +32,8 @@ userList.value = await fetchUsers();
   </main>
 </template>
 
-<style scoped>
-main {
+<style module>
+.main {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -42,7 +42,7 @@ main {
   padding: 10px;
 }
 
-main h1 {
+.main h1 {
   margin-top: 10vh;
   margin-bottom: 20px;
   text-align: center;
