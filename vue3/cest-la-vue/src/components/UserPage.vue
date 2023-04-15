@@ -1,37 +1,20 @@
-<script>
+<script setup>
 import UserCard from "./UserCard.vue";
 import { uuidv4 } from "../utils/fn";
 
+import { userList } from "../composables/useUserStore";
+
 import { reactive } from "vue";
 
-export default {
-  components: {
-    UserCard,
-  },
+const fetchUsers = async () => {
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/users"
+  ).then((response) => response.json());
 
-  async setup() {
-    const state = reactive({
-      users: [],
-    });
-
-    const fetchUsers = async () => {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users"
-      ).then((response) => response.json());
-
-      return response;
-    };
-    const users = await fetchUsers();
-
-    state.users = users;
-
-    return state;
-  },
-
-  methods: {
-    uniqueID: uuidv4,
-  },
+  return response;
 };
+
+userList.value = await fetchUsers();
 </script>
 
 <template>
@@ -39,8 +22,8 @@ export default {
     <h1>C'est La Vue - Users</h1>
     <div class="user-container">
       <UserCard
-        v-for="user in users"
-        :key="uniqueID()"
+        v-for="user in userList"
+        :key="uuidv4()"
         :name="user.name"
         :email="user.email"
         :username="user.username"

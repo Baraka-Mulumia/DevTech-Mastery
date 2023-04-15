@@ -1,20 +1,18 @@
-<script>
-export default {
-  props: {
-    name: {
-      type: String,
-      required: true,
-    },
-    username: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
+<script setup>
+const props = defineProps({
+  name: {
+    type: String,
+    required: true,
   },
-};
+  username: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+});
 </script>
 
 <template>

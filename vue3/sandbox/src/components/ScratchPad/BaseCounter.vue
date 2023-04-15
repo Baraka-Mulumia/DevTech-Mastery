@@ -1,34 +1,31 @@
-<script>
-export default {
-  data: () => ({
-    count: 10,
-    counterTitle: 'Counter Standard',
-    incrementAmount: 8
-  }),
+<script setup>
+import { reactive, computed } from 'vue'
+import { newCount } from '../../composables/CountStore'
 
-  computed: {
-    displayTitle() {
-      if (this.count > 20) {
-        return 'Counter standard - Very Long'
-      } else {
-        return 'Counter Standard'
-      }
-    },
+const state = reactive({
+  count: newCount,
+  counterTitle: 'Counter Standard',
+  incrementAmount: 8
+})
 
-    optimizeIncremeentAmount() {
-      return this.displayTitle.length * this.incrementAmount
-    }
-  },
-
-  methods: {
-    incrementCount() {
-      this.count += this.optimizeIncremeentAmount
-    },
-
-    decrementCount() {
-      this.count -= this.optimizeIncremeentAmount
-    }
+const displayTitle = computed(() => {
+  if (state.count > 20) {
+    return 'Counter standard - Very Long'
+  } else {
+    return 'Counter Standard'
   }
+})
+
+const optimizeIncrementAmount = computed(() => {
+  return displayTitle.value.length * state.incrementAmount
+})
+
+const incrementCount = () => {
+  state.count += optimizeIncrementAmount.value
+}
+
+const decrementCount = () => {
+  state.count -= optimizeIncrementAmount.value
 }
 </script>
 
@@ -38,13 +35,13 @@ export default {
 
     <div>
       <label for="incrementAmount">Increment By: </label>
-      <input type="number" id="incrementAmount" v-model.number="incrementAmount" />
-      <p>Optimized Increment: {{ optimizeIncremeentAmount }}</p>
+      <input type="number" id="incrementAmount" v-model.number="state.incrementAmount" />
+      <p>Optimized Increment: {{ optimizeIncrementAmount }}</p>
     </div>
 
-    <p>Count : {{ count }}</p>
+    <p>Count : {{ state.count }}</p>
 
-    <button @click="decrementCount" :disabled="count <= 0">Decrement Count</button>
+    <button @click="decrementCount" :disabled="state.count <= 0">Decrement Count</button>
     <button @click="incrementCount">Increment Count</button>
   </div>
 </template>
