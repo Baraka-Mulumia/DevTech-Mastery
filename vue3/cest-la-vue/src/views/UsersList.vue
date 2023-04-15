@@ -1,8 +1,8 @@
 <script setup>
-import UserCard from "./UserCard.vue";
-import { uuidv4 } from "../utils/fn";
+import UserCard from "@/components/UserCard.vue";
+import { uuidv4 } from "@/utils/fn";
 
-import { userList } from "../composables/useUserStore";
+import { userList } from "@/composables/useUserStore";
 
 import { reactive } from "vue";
 
@@ -27,6 +27,7 @@ userList.value = await fetchUsers();
         :name="user.name"
         :email="user.email"
         :username="user.username"
+        :id="user.id"
       />
     </div>
   </main>

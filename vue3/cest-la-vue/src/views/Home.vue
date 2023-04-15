@@ -1,7 +1,7 @@
 <script setup>
-import UserCard from "./UserCard.vue";
-import { userList } from "../composables/useUserStore";
-import { uuidv4 } from "../utils/fn";
+import UserCard from "@/components/UserCard.vue";
+import { userList } from "@/composables/useUserStore";
+import { uuidv4 } from "@/utils/fn";
 
 import { computed } from "vue";
 
@@ -25,41 +25,12 @@ const previewUsers = computed(() => {
       :name="user.name"
       :email="user.email"
       :username="user.username"
+      :id="user.id"
     />
   </div>
 </template>
 
 <style scoped>
-main {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  max-width: 320px;
-  margin: 0 auto;
-}
-
-main h1 {
-  margin-top: 10vh;
-  margin-bottom: 20px;
-}
-
-label {
-  margin-bottom: 5px;
-}
-
-input[type="email"] {
-  padding: 0.5rem;
-  margin-bottom: 30px;
-}
-
-button {
-  border: 1px solid green;
-  padding: 10px;
-  color: green;
-  background-color: rgb(213, 255, 213);
-  cursor: pointer;
-}
-
 .user-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

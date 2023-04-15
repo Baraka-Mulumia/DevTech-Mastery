@@ -12,18 +12,24 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  id: {
+    type: Number,
+    required: true,
+  },
 });
 </script>
 
 <template>
   <div class="card">
-    <p class="card-title">
-      <span class="item-label">Username:</span> {{ username }}
-    </p>
-    <p class="card-body"><span class="item-label">Name:</span> {{ name }}</p>
-    <p class="card-footer">
-      <span class="item-label">Email:</span> {{ email }}
-    </p>
+    <router-link :to="`/users/${id}`" class="container">
+      <p class="card-title">
+        <span class="item-label">Username:</span> {{ username }}
+      </p>
+      <p class="card-body"><span class="item-label">Name:</span> {{ name }}</p>
+      <p class="card-footer">
+        <span class="item-label">Email:</span> {{ email }}
+      </p>
+    </router-link>
   </div>
 </template>
 
@@ -34,6 +40,10 @@ const props = defineProps({
   min-width: 240px;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.card .container {
+  text-decoration: none;
 }
 
 .card:hover {
